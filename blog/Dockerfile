@@ -1,5 +1,4 @@
-FROM node:8
-
+FROM node:current-alpine As development
 # Create app directory
 WORKDIR /usr/src/app
 
@@ -9,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY yarn.lock ./
 
-RUN yarn
+RUN yarn install
 # If you are building your code for production
 # RUN npm ci --only=production
 
@@ -17,4 +16,5 @@ RUN yarn
 COPY . .
 
 EXPOSE 4000
-CMD [ "yarn", "run","start:dev" ]
+
+CMD [ "yarn", "start" ]
